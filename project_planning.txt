@@ -1,0 +1,11 @@
+Current potential project ideas:
+  - Simple search tool to retrieve relevant "Python Enhancement Proposals" (PEPs) [Proposed by Matias
+    Summanen]
+  
+    - The problem this would solve is nothing ground-breaking, it is simply "make it less bothersome
+      to look up things that are written abount in PEPs".
+
+    - The data to be index would be the PEPs available online. Given their quantity, it would most
+      likely be more space efficient to use a module such as "requests" to get the html data directly
+      from the relevant PEPs. However, this could make the processing more complicated, or harder to
+      impliment.
