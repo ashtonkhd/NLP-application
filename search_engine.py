@@ -41,7 +41,7 @@ def rewrite_query(query):
     return " ".join(rewrite_token(t) for t in query.split())
 
 # Process and evaluate the query
-def process_query(query, td_matrix, t2i, documents, max_results=5, max_length=300):
+def process_query(query, td_matrix, t2i, documents):
     rewritten_query = rewrite_query(query)
     
     try:
