@@ -4,6 +4,7 @@ import requests
 import json
 import os
 from sklearn.feature_extraction.text import CountVectorizer
+from bs4 import BeautifulSoup
 
 # Operator replacements
 d = {
@@ -17,6 +18,17 @@ PEP_URL: str = "https://peps.python.org/"
 PEP_PATTERN = "pep-[0-9]+"
 
 def process_pep_data(pep_entries):
+    """Processes raw pep_data into usable data
+
+    Takes the pep entries, uses requests to get their content and then
+    uses BeautifulSoup to take all the text from the paragraphs. This is
+    then combined into a single string and finally added as a dictionary
+    entry.
+
+    :param pep_entries: list of pep URLs
+
+    :returns: a dictionary of pep-numbers with their content
+    """
     total_entries = len(pep_entries)
     current_entry = 1
 
@@ -40,6 +52,15 @@ def process_pep_data(pep_entries):
     return proper_pep_data
 
 def get_pep_data():
+    """Gets peps from pep 0 (pep index)
+
+    Uses requests to download all pep links from PEP_URL (found via regex
+    matching with PEP_PATTERN). Then uses :func: `process_pep_data()` to
+    turn them into a dictionary of usable data.
+
+    :returns: a dictionary of processed pep_data.
+    
+    """
     pep_index = requests.get(PEP_URL)
     html_data = BeautifulSoup(pep_index.content, 'html.parser')
 
@@ -69,6 +90,7 @@ def save_pep_data(pep_data):
 
 # Load docs
 def load_documents_from_files(file_path):
+    """Reads the data from document files"""
     try:
         with open(file_path, 'r', encoding='utf-8') as source:
             documents = json.load(source)
