@@ -1,6 +1,8 @@
 import re
 import numpy as np
 import requests
+import json
+import os
 from sklearn.feature_extraction.text import CountVectorizer
 
 # Operator replacements
@@ -11,17 +13,74 @@ d = {
     "(": "(", ")": ")"
 }
 
+PEP_URL: str = "https://peps.python.org/"
+PEP_PATTERN = "pep-[0-9]+"
+
+def process_pep_data(pep_entries):
+    total_entries = len(pep_entries)
+    current_entry = 1
+
+    proper_pep_data = {}
+    
+    for entry in pep_entries:
+        print(f"[{(current_entry/total_entries)*100:.2f}%] prosessing {entry[0:-1]}")
+        entry_link = f"{PEP_URL}{entry}"
+        entry_request = requests.get(entry_link)
+        entry_data = BeautifulSoup(entry_request.content, 'html.parser')
+
+        para_text = []
+        
+        for para in entry_data.find_all('p'):
+            para_text.append(para.text)
+
+
+        proper_pep_data.update({entry[0:-1]: " ".join(para_text)})
+        current_entry += 1
+
+    return proper_pep_data
+
+def get_pep_data():
+    pep_index = requests.get(PEP_URL)
+    html_data = BeautifulSoup(pep_index.content, 'html.parser')
+
+    pep_entries = []
+    
+    for link in html_data.find_all('a', href=True):
+        if re.search(PEP_PATTERN, link['href']) != None:
+            pep_number = link['href']
+            
+            if '#' in pep_number:
+                pass
+            else:
+                if pep_number in pep_entries:
+                    pass
+                else:
+                    pep_entries.append(pep_number)
+
+    processed = process_pep_data(pep_entries)
+
+    return processed
+
+def save_pep_data(pep_data):
+    with open("./pep_data.json", "w", encoding='utf-8') as target:
+        json.dump(pep_data, target)
+
+    
+
 # Load docs
-def load_documents_from_files(file_paths):
-    documents = []
-    for file_path in file_paths:
-        try:
-            with open(file_path, 'r', encoding='utf-8') as f:
-                content = f.read()
-                articles = content.split('\n</article>\n')  # Assuming each article is separated by </article>
-                documents.extend([article.strip() for article in articles if article.strip()])
-        except Exception as e:
-            print(f"Error reading the file {file_path}: {e}")
+def load_documents_from_files(file_path):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as source:
+            documents = json.load(source)
+    #for file_path in file_paths:
+        #try:
+            #with open(file_path, 'r', encoding='utf-8') as f:
+                #content = f.read()
+                #articles = content.split('\n</article>\n')  # Assuming each article is separated by </article>
+                #documents.extend([article.strip() for article in articles if article.strip()])
+    except Exception as e:
+        print(f"Error reading the file {file_path}: {e}")
+        
     return documents
 
 # Initialize 
@@ -99,20 +158,36 @@ def run_search_engine(documents, td_matrix, t2i):
             break
         process_query(query, td_matrix, t2i, documents)
 
-# Files
-file_paths = [
-    "wiki.txt",  
-    "wiki_a.txt"  
-]
+def main() -> None:
+    if not(os.path.exists("./pep_data.json")):
+           pep_data = get_pep_data()
+           save_pep_data(pep_data)
 
-# Load docs
-documents = load_documents_from_files(file_paths)
+    # Changed to a single filepath since only one pep_data file now
+    # -- M. Summanen
+    file_path = "./pep_data.json"
 
-if documents:
-    # Initialize 
-    td_matrix, terms, t2i, cv, sparse_matrix = initialize_search_engine(documents)
+    # Load docs
+    documents = load_documents_from_files(file_path)
+    print(documents)
 
-    # Start 
-    run_search_engine(documents, td_matrix, t2i)
-else:
-    print("No documents were loaded from the files.")
+
+    """
+    The Below code has been commented out for testing purposes when
+    implementing the PEP functionality.
+
+    TODO: Uncomment when needed
+    -- M. Summanen
+    """
+    #if documents:
+        # Initialize 
+    #    td_matrix, terms, t2i, cv, sparse_matrix = initialize_search_engine(documents)
+
+        # Start 
+        # run_search_engine(documents, td_matrix, t2i)
+
+    #else:
+        # print("No documents were loaded from the files.")
+    
+if __name__ == "__main__":
+    main()

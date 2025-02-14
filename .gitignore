@@ -1,2 +1,6 @@
 *~
 *__pycache__*
+pep-data/
+simple-pep-searcher.py
+src/boolean_search.py
+pep_data.json
