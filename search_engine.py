@@ -133,7 +133,7 @@ def rewrite_query(query):
     #return " ".join(rewrite_token(t) for t in query.split())
 
 # Process and evaluate the query
-def process_query(query, td_matrix, t2i, documents):
+def process_query(query, td_matrix, t2i):
     rewritten_query = rewrite_query(query)
     
     try:
@@ -189,35 +189,56 @@ def process_query(query, td_matrix, t2i, documents):
         else:  # If no AND or OR, process as single term
             term = rewritten_query
             term_matrix = td_matrix[t2i[term]]
-            print(term_matrix)
+            doc_hits = term_matrix
 
-        # Check
-        #if len(doc_hits_list) == 0:
-            #print(f"\nNo results for query: {query}")
-            #return
+        return doc_hits, True
 
-        # Print 
-        #print(f"\nFound {len(doc_hits_list)} matching documents:")
-        #for i, doc_idx in enumerate(doc_hits_list[:max_results]):
-            #doc = documents[doc_idx]
-            #print(f"\nMatching doc #{i + 1}:")
-            #print(doc[:max_length] + "..." if len(doc) > max_length else doc)
+    
 
     except KeyError as e:
         print(f"Term '{e.args[0]}' not found in documents.")
+        return None, False
     except SyntaxError:
         print(f"Error: Invalid query syntax -> '{query}'")
+        return None, False
     except Exception as e:
         print(f"Error processing query: {e}")
+        return None, False
 
-# Run SE in e loop
+def rank_hits(hit_matrix):
+    ranked = []
+
+    count = 0
+    for y, x in np.ndindex(hit_matrix.shape):
+        count += 1
+
+    print(count)
+
+    
+    for y, x in np.ndindex(hit_matrix.shape):
+        ranked.append((x, int(hit_matrix[y, x])))
+
+    ranked.sort(key=lambda tup: tup[1], reverse=True)
+
+    print(len(ranked))
+        
+    return ranked
+    
+# Run SE in a loop
 def run_search_engine(matrix, cv, pep_numbers):
     t2i = cv.vocabulary_
     while True:
         query = input("\nEnter your query (or type 'quit' to exit): ")
         if query.lower() == 'quit' or query == '':
             break
-        process_query(query, matrix, t2i, pep_numbers)
+        results, got_hits = process_query(query, matrix, t2i)
+
+        if (got_hits):
+            ranked_list = rank_hits(results)
+
+            print("Results in:")
+            for i in range(5):
+                print(f"{pep_numbers[ranked_list[i][0]]}: {ranked_list[i][1]}")
 
 def main() -> None:
     if not(os.path.exists("./pep_data.json")):
