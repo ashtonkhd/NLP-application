@@ -14,6 +14,8 @@ d = {
     "(": "(", ")": ")"
 }
 
+LOGICAL_OPERATORS = ["&", "|"]
+
 PEP_URL: str = "https://peps.python.org/"
 PEP_PATTERN = "pep-[0-9]+"
 
