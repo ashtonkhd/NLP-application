@@ -85,6 +85,9 @@ def get_pep_data():
     return processed
 
 def save_pep_data(pep_data):
+
+    # REMINDME: change path to 'data/pep_data.json'
+    
     with open("./pep_data.json", "w", encoding='utf-8') as target:
         json.dump(pep_data, target)
 
@@ -241,12 +244,14 @@ def run_search_engine(matrix, cv, pep_numbers):
                 print(f"{pep_numbers[ranked_list[i][0]]}: {ranked_list[i][1]}")
 
 def main() -> None:
+     # REMINDME: change path to 'data/pep_data.json'
     if not(os.path.exists("./pep_data.json")):
            pep_data = get_pep_data()
            save_pep_data(pep_data)
 
     # Changed to a single filepath since only one pep_data file now
     # -- M. Summanen
+    # REMINDME: change path to 'data/pep_data.json'
     file_path = "./pep_data.json"
 
     # Load docs
