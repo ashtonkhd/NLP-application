@@ -140,11 +140,6 @@ def process_query(query, td_matrix, t2i):
     rewritten_query = rewrite_query(query)
     
     try:
-
-        """
-        I have commented out this code for testing purposes.
-        -- M. Summanen
-        """
         # TODO: Complete query functionality
 
         # Evaluate
