@@ -209,16 +209,11 @@ def rank_hits(hit_matrix):
     count = 0
     for y, x in np.ndindex(hit_matrix.shape):
         count += 1
-
-    print(count)
-
     
     for y, x in np.ndindex(hit_matrix.shape):
         ranked.append((x, int(hit_matrix[y, x])))
 
     ranked.sort(key=lambda tup: tup[1], reverse=True)
-
-    print(len(ranked))
         
     return ranked
     
