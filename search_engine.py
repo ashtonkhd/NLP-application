@@ -6,6 +6,17 @@ import os
 from sklearn.feature_extraction.text import CountVectorizer
 from bs4 import BeautifulSoup
 
+
+# I have seperated the program into multiple files in order to make each
+# file less of a bother to work with than one long file would be. I have
+# attempted to name them as clearly as possible. If you object to this
+# method, do please tell.
+# -- M. Summanen
+
+from src import boolean_search as bosrch
+from src import rank_search as rascrh
+
+
 # Operator replacements
 d = {
     "and": "&", "AND": "&",
@@ -15,6 +26,7 @@ d = {
 }
 
 LOGICAL_OPERATORS = ["&", "|"]
+ACCEPTED_SEARCH_STYLES = ["ranked", "boolean"]
 
 PEP_URL: str = "https://peps.python.org/"
 PEP_PATTERN = "pep-[0-9]+"
@@ -109,16 +121,6 @@ def load_documents_from_files(file_path):
         print(f"Error reading the file {file_path}: {e}")
         
     return documents
-
-# Initialize 
-def initialize_search_engine(documents):
-    cv = CountVectorizer(lowercase=True, binary=False)
-    _matrix = cv.fit_transform(documents).T.todense()
-    #sparse_matrix = cv.fit_transform(documents)
-    #td_matrix = sparse_matrix.T  # T-D matrix
-    #terms = cv.get_feature_names_out()
-    #t2i = cv.vocabulary_  # T-to-I dictionary
-    return _matrix, cv
 
 # Rewrite query to Boo
 def rewrite_token(t):
@@ -250,11 +252,24 @@ def main() -> None:
     pep_contents = list(documents.values())
 
     pep_matrix = None
-    
+
+    # Support for Boolean, ranked, etc.
+    search_style = ""
+    while not(search_style in ACCEPTED_SEARCH_STYLES):
+        search_style = input("Search method [Boolean, ranked]: ").lower()
+
+        
     if not(len(pep_contents) == 0):
-        # Initialize
-        pep_matrix, vectorizer = initialize_search_engine(pep_contents)
-        run_search_engine(pep_matrix, vectorizer, pep_numbers)
+        match search_style:
+
+            # TODO: Make run_search_engine() run differently depending
+            # on search engine type.
+            
+            case "ranked":
+                pep_matrix, vectorizer = rascrh.initialize_ranked_engine(pep_contents)
+
+            case "boolean":
+                pep_matrix, vectorizer = bosrch.initialize_binary_engine(pep_contents)
 
     else:
         print("Unable to load pep_data.json. Exiting...")
