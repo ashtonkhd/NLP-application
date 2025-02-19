@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup
 
 from src import boolean_search as bosrch
 from src import rank_search as rascrh
-
+from src import search_logic as srchengine
 
 # Operator replacements
 d = {
@@ -125,116 +125,7 @@ def load_documents_from_files(file_path):
 # Rewrite query to Boo
 def rewrite_token(t):
     return d.get(t, f'td_matrix[t2i["{t}"]]')  # Replace operators or map terms
-
-def rewrite_query(query):
-    split_query = query.split()
-
-    for index in range(len(split_query)):
-        if split_query[index] in list(d.keys()):
-            split_query[index] = d[split_query[index]]
-
-    return " ".join(split_query)
             
-    #return " ".join(rewrite_token(t) for t in query.split())
-
-# Process and evaluate the query
-def process_query(query, td_matrix, t2i):
-    rewritten_query = rewrite_query(query)
-    
-    try:
-        # TODO: Complete query functionality
-
-        # Evaluate
-        if ("&" in rewritten_query) or ("|" in rewritten_query):
-            terms_in_query = rewritten_query.split()
-            doc_hits = None
-
-            relation_to_previous = None
-            
-            for term in terms_in_query:
-                if not(term in LOGICAL_OPERATORS):
-                    term_matrix = td_matrix[t2i[term]]
-
-                    # Apply AND or OR 
-                    if doc_hits is None:
-                        doc_hits = term_matrix
-                    else:
-                        new_doc_hits = []
-                        match relation_to_previous:
-                            case "AND":
-                                for y, x in np.ndindex(term_matrix.shape):
-                                    if (term_matrix[y, x] != 0) and (doc_hits[y, x] != 0):
-                                        new_doc_hits.append(int(term_matrix[y, x] + doc_hits[y, x]))
-                                    else:
-                                        new_doc_hits.append(0)
-
-                                doc_hits = np.matrix(new_doc_hits)
-                                
-                            case "OR":
-                                for y, x in np.ndindex(term_matrix.shape):
-                                    if (term_matrix[y, x] != 0) or (doc_hits[y, x] != 0):
-                                        new_doc_hits.append(int(term_matrix[y, x] + doc_hits[y, x]))
-
-                                doc_hits = np.matrix(new_doc_hits)
-
-
-                else:
-                    match term:
-                        case "&":
-                            relation_to_previous = "AND"
-                        case "|":
-                            relation_to_previous = "OR"
-
-
-        else:  # If no AND or OR, process as single term
-            term = rewritten_query
-            term_matrix = td_matrix[t2i[term]]
-            doc_hits = term_matrix
-
-        return doc_hits, True
-
-    
-
-    except KeyError as e:
-        print(f"Term '{e.args[0]}' not found in documents.")
-        return None, False
-    except SyntaxError:
-        print(f"Error: Invalid query syntax -> '{query}'")
-        return None, False
-    except Exception as e:
-        print(f"Error processing query: {e}")
-        return None, False
-
-def rank_hits(hit_matrix):
-    ranked = []
-
-    count = 0
-    for y, x in np.ndindex(hit_matrix.shape):
-        count += 1
-    
-    for y, x in np.ndindex(hit_matrix.shape):
-        ranked.append((x, int(hit_matrix[y, x])))
-
-    ranked.sort(key=lambda tup: tup[1], reverse=True)
-        
-    return ranked
-    
-# Run SE in a loop
-def run_search_engine(matrix, cv, pep_numbers):
-    t2i = cv.vocabulary_
-    while True:
-        query = input("\nEnter your query (or type 'quit' to exit): ")
-        if query.lower() == 'quit' or query == '':
-            break
-        results, got_hits = process_query(query, matrix, t2i)
-
-        if (got_hits):
-            ranked_list = rank_hits(results)
-
-            print("Results in:")
-            for i in range(5):
-                print(f"{pep_numbers[ranked_list[i][0]]}: {ranked_list[i][1]}")
-
 def main() -> None:
      # REMINDME: change path to 'data/pep_data.json'
     if not(os.path.exists("./pep_data.json")):
@@ -267,9 +158,12 @@ def main() -> None:
             
             case "ranked":
                 pep_matrix, vectorizer = rascrh.initialize_ranked_engine(pep_contents)
+                model = "ranked"
 
             case "boolean":
                 pep_matrix, vectorizer = bosrch.initialize_binary_engine(pep_contents)
+
+        srchengine.run_search_engine(pep_matrix, vectorizer, pep_numbers, model)
 
     else:
         print("Unable to load pep_data.json. Exiting...")
