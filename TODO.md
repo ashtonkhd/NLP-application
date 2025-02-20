@@ -12,11 +12,11 @@ different types of searching engines.
 
 ## In Progress
 
-- [ ] Add support for different types of searches
-  - [ ] Support for boolean search
-  - [x] Support for ranked search
-
 ## Done
+
+- [x] Add support for different types of searches
+  - [x] Support for boolean search
+  - [x] Support for ranked search
 
 
 
