@@ -162,6 +162,7 @@ def main() -> None:
 
             case "boolean":
                 pep_matrix, vectorizer = bosrch.initialize_binary_engine(pep_contents)
+                model = "boolean"
 
         srchengine.run_search_engine(pep_matrix, vectorizer, pep_numbers, model)
 

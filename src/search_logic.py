@@ -91,6 +91,69 @@ def _rank_hits(hit_matrix):
 
     return ranked
 
+def _process_query_boolean(query, td_matrix, t2i):
+    rewritten_query = _rewrite_query(query)
+    
+    try:
+        # Check for logic operators, assume single term otherwise.
+        if ("&" in rewritten_query) or ("|" in rewritten_query):
+            terms_in_query = rewritten_query.split()
+            
+            doc_hits = None
+            relation_to_previous = None
+            first_time = True # The previous way just stopped working -M. Summanen
+
+            for term in terms_in_query:
+                if not(term in LOGIC_OPERATORS):
+                    term_matrix = td_matrix[t2i[term]]
+
+                    if first_time == True:
+                        doc_hits = term_matrix
+                        first_time = False
+
+                    else:
+                        new_doc_hits = []
+                        # Apply logical functionality
+                        match relation_to_previous:
+                            case "AND":
+                                for y, x in np.ndindex(term_matrix.shape):
+                                    if (term_matrix[y, x] != 0) and (doc_hits[y, x] != 0):
+                                        new_doc_hits.append(1)
+                                    else:
+                                        new_doc_hits.append(0)
+
+                                doc_hits = np.matrix(new_doc_hits)
+
+                            case "OR":
+                                for y, x in np.ndindex(term_matrix.shape):
+                                    if (term_matrix[y, x] != 0) or (doc_hits[y, x] != 0):
+                                        new_doc_hits.append(1)
+
+                                doc_hits = np.matrix(new_doc_hits)
+                else:
+                    match term:
+                        case "&":
+                            relation_to_previous = "AND"
+                        case "|":
+                            relation_to_previous = "OR"
+        else:
+            term = rewritten_query
+            term_matrix = td_matrix[t2i[term]]
+            doc_hits = term_matrix
+
+        return doc_hits, True
+
+    except KeyError as e:
+        print(f"Term not found in any documents.")
+        return None, False
+    except SyntaxError:
+        print(f"Invalid query syntax -> '{query}'")
+        return None, False
+    except Exception as e:
+        print(f"Error processing query: {e}")
+        return None, False
+            
+    
 def run_search_engine(matrix, cv, pep_numbers, model):
     t2i = cv.vocabulary_
 
@@ -111,4 +174,16 @@ def run_search_engine(matrix, cv, pep_numbers, model):
                     print("Results in:")
                     for i in range(5):
                         print(f"{pep_numbers[ranked_list[i][0]]}: {ranked_list[i][1]}")
+
+            case "boolean":
+                results, got_hits = _process_query_boolean(query, matrix, t2i)
+
+                if (got_hits):
+                    # Some of the results are still zero, so this makes
+                    # all the 1s go before them.
+                    result_list = _rank_hits(results)
+                    
+                    print("Results in:")
+                    for i in range(5):
+                        print(f"{pep_numbers[result_list[i][0]]}")
         
