@@ -7,7 +7,7 @@ from src import search_logic as srchengine
 app = Flask(__name__)
 
 def load_pep_data():
-    with open("data/pep_data.json", "r", encoding="utf-8") as file:
+    with open("pep_data.json", "r", encoding="utf-8") as file:
         return json.load(file)
 
 documents = load_pep_data()
