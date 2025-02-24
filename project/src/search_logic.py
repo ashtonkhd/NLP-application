@@ -156,9 +156,10 @@ def _process_query_boolean(query, td_matrix, t2i):
         return None, False
             
     
-def run_search_engine(matrix, cv, pep_numbers, model, query):
+def run_search_engine(matrix, cv, pep_numbers, model, query, show=5):
     t2i = cv.vocabulary_
-
+    _return_documents = []
+    
     match model:
         case "ranked":
             results, got_hits = _process_query_ranked(query, matrix, t2i)

@@ -12,8 +12,13 @@
   <body>
     <a href="/">Back</a>
     
+<<<<<<< HEAD
     {% for number in numbers %}
     <p>{{number}} -- <a href={{metadata[number]["url"]}}>{{metadata[number]["title"]}}</a></p>
+=======
+    {% for result in results %}
+    <p>{{result}}</p>
+>>>>>>> 267d606 (Starting work on smarter way to do PEPs....)
     {% endfor %}
   </body>
 </html>

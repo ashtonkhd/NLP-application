@@ -19,5 +19,7 @@ function performSearch() {
 		result.appendChild(li);
 	    });
 	});
+
+    return result;
 }
 	    
