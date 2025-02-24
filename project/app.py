@@ -12,7 +12,10 @@ def load_pep_data():
 
 documents = load_pep_data()
 pep_numbers = list(documents.keys())
-pep_contents = list(documents.values())
+pep_contents = []
+
+for number in pep_numbers:
+    pep_contents.append(documents[number]["content"])
 
 # Initialisation
 boolean_matrix, boolean_vectorizer = bosrch.initialize_binary_engine(pep_contents)
@@ -24,17 +27,35 @@ def index():
 
 @app.route("/search", methods=["POST"])
 def search():
-    query = request.json.get("query", "")
-    method = request.json.get("method", "boolean")
+    query = _search["query"]
+    method = _search["method"]
 
-    if method == "boolean":
-        results = srchengine.run_search_engine(boolean_matrix, boolean_vectorizer, pep_numbers, "boolean", query)
-    elif method == "tf-idf":
-        results = srchengine.run_search_engine(ranked_matrix, ranked_vectorizer, pep_numbers, "ranked", query)
+    # FIX: Breaks if the amount cannot be converted to integer!
+    count = _search["amount"]
+
+    if not(count.isdigit()):
+        count = 5
     else:
-        results = []  # Semantic engine 
+        count = int(count)
+
+    results = []
+    numbers = []
+    links = []
     
-    return jsonify(results)
+    match method:
+        case "boolean":
+            results = srchengine.run_search_engine(boolean_matrix,boolean_vectorizer,pep_numbers,"boolean",query, count)
+
+            for entry in results:
+                numbers.append(entry)
+
+        case "ranked":
+            results = srchengine.run_search_engine(ranked_matrix,ranked_vectorizer,pep_numbers,"ranked",query, count)
+
+            for entry in results:
+                numbers.append(entry[0])
+    
+    return render_template("search.html", count=count, numbers=numbers, metadata=documents)
 
 if __name__ == "__main__":
     app.run(debug=True)

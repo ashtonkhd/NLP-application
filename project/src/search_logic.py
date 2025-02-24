@@ -15,6 +15,8 @@ def _rewrite_query(query):
     for index in range(len(split_query)):
         if split_query[index] in list(LOGIC_DICTIONARY.keys()):
             split_query[index] = LOGIC_DICTIONARY[split_query[index]]
+        else:
+            split_query[index] = split_query[index].lower()
 
     return " ".join(split_query)
 
@@ -154,36 +156,29 @@ def _process_query_boolean(query, td_matrix, t2i):
         return None, False
             
     
-def run_search_engine(matrix, cv, pep_numbers, model):
+def run_search_engine(matrix, cv, pep_numbers, model, query):
     t2i = cv.vocabulary_
 
-    # The search engine runs indefinitely, unless break is used.
-    while True:
-        query = input("\nEnter your query (or type 'quit' to exit): ")
+    match model:
+        case "ranked":
+            results, got_hits = _process_query_ranked(query, matrix, t2i)
 
-        if query.lower() == 'quit' or query == '':
-            break
+            if (got_hits):
+                ranked_list = _rank_hits(results)
 
-        match model:
-            case "ranked":
-                results, got_hits = _process_query_ranked(query, matrix, t2i)
+                for i in range(show):
+                    _return_documents.append((f"{pep_numbers[ranked_list[i][0]]}", int(ranked_list[i][1])))
 
-                if (got_hits):
-                    ranked_list = _rank_hits(results)
+        case "boolean":
+            results, got_hits = _process_query_boolean(query, matrix, t2i)
 
-                    print("Results in:")
-                    for i in range(5):
-                        print(f"{pep_numbers[ranked_list[i][0]]}: {ranked_list[i][1]}")
+            if (got_hits):
+                # Some of the results are zero, so this makes
+                # all the 1s go before them.
+                result_list = _rank_hits(results)
+                
+                for i in range(show):
+                    if not(result_list[i][1] == 0):
+                        _return_documents.append(pep_numbers[result_list[i][0]])
 
-            case "boolean":
-                results, got_hits = _process_query_boolean(query, matrix, t2i)
-
-                if (got_hits):
-                    # Some of the results are still zero, so this makes
-                    # all the 1s go before them.
-                    result_list = _rank_hits(results)
-                    
-                    print("Results in:")
-                    for i in range(5):
-                        print(f"{pep_numbers[result_list[i][0]]}")
-        
+    return _return_documents
