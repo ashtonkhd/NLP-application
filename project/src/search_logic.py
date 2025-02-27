@@ -2,11 +2,17 @@ import numpy as np
 
 from . import query_processing as quproc
 
-def _squash_tuple(tup):
-    if tup[1] > 0:
-        tup[1] = 1
+def _boolean_convert(ranked):
+    _tmp = ranked
+    _new_ranked = []
 
-    return tup
+    for tup in range(len(_tmp)):
+        if _tmp[tup][1] > 0:
+            _new_ranked.append((_tmp[tup][0], 1))
+        else:
+            _new_ranked.append((_tmp[tup][0], 0))
+
+    return _new_ranked
 
 def _rank_hits(hit_matrix, mode):
     ranked = []
@@ -17,7 +23,8 @@ def _rank_hits(hit_matrix, mode):
 
     match mode:
         case "boolean":
-            _mode_ranked = ranked
+            # Replaces ranked occurrences with either 1 (appears) or 0 (doesn't appear)
+            _mode_ranked = _boolean_convert(ranked)
         case "ranked":
             _mode_ranked = ranked
 
