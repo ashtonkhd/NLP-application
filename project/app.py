@@ -1,5 +1,6 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template
 import json
+
 from src import boolean_search as bosrch
 from src import rank_search as rascrh
 from src import search_logic as srchengine
@@ -27,10 +28,10 @@ def index():
 
 @app.route("/search", methods=["POST"])
 def search():
+    _search = request.form
     query = _search["query"]
     method = _search["method"]
-
-    # FIX: Breaks if the amount cannot be converted to integer!
+    
     count = _search["amount"]
 
     if not(count.isdigit()):
