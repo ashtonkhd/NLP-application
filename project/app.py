@@ -5,10 +5,12 @@ from src import boolean_search as bosrch
 from src import rank_search as rascrh
 from src import search_logic as srchengine
 
+PEP_DATA = "project/static/pep_data.json"
+
 app = Flask(__name__)
 
 def load_pep_data():
-    with open("pep_data.json", "r", encoding="utf-8") as file:
+    with open(PEP_DATA, "r", encoding="utf-8") as file:
         return json.load(file)
 
 documents = load_pep_data()
