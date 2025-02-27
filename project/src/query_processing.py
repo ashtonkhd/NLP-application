@@ -11,6 +11,14 @@ LOGIC_OPERATORS = list(set(LOGIC_DICTIONARY.values()))
 
 
 def _rewrite_query(query):
+    """Rewrites search-query
+
+    Replaces logic operators with variants from LOGIC_DICTIONARY. Makes other words lowercase.
+
+    :param query: the search query to rewrite
+
+    :returns: rewritten search query.
+    """
     _tmp_split = query.split()
 
     for _index in range(len(_tmp_split)):
@@ -67,6 +75,14 @@ def _get_new_hits(term_matrix, doc_hits, relation_to_previous, not_effect):
     return np.matrix(_tmp), not_effect
 
 def _get_reverse_hits(term_matrix):
+    """Function for implementing NOT-operator
+
+    Imitates NOT by turning value into 0, if appears, and 1, if absent.
+
+    :param term_matrix: the term matrix on which to use NOT.
+
+    :returns: term_matrix with NOT applied
+    """
     for y,x in np.ndindex(term_matrix.shape):
         if term_matrix[y,x] > 0:
             term_matrix[y, x] = 0
@@ -76,6 +92,16 @@ def _get_reverse_hits(term_matrix):
     return term_matrix
 
 def process_query(query, td_matrix, t2i):
+    """Main function for processing queries
+
+    Processes a given query, according ot specifics about it such as logic operators and amount of terms.
+
+    :param query: the query to process
+    :param td_matrix: term matrix for the dataset
+    :param t2i: dictionary for converting terms to indices in td_matrix.
+
+    :returns: results for the query as matrix.
+    """
     rewritten_query = _rewrite_query(query)
 
     try:

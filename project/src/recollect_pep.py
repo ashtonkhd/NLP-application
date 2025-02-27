@@ -1,3 +1,7 @@
+"""
+Simple script for recollecting PEP-data if needed
+"""
+
 import requests
 import json
 import typing

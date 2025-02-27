@@ -15,6 +15,16 @@ def _boolean_convert(ranked):
     return _new_ranked
 
 def _rank_hits(hit_matrix, mode):
+    """Ranks the hits and orders from highest to lowest.
+
+    Ranks hit matrices, however if mode is 'boolean' instead converts to
+    boolean representation prior to ranking.
+
+    :param hit_matrix: matrix containing amounts of occurrences in documents
+    :param mode: mode specifying how to preprocess hit_matrix
+
+    :returns: ranked hit_matrix, preprocessed according to mode.
+    """
     ranked = []
     _mode_ranked = []
 
@@ -34,6 +44,19 @@ def _rank_hits(hit_matrix, mode):
 
     
 def run_search_engine(matrix, cv, pep_numbers, model, query, show=5):
+    """Main search-function
+
+    Takes query and processes it, returning either a specified amount of top results, or defaulting to top 5
+
+    :param matrix: The term matrix for the documents
+    :param cv: Count-Vectorizer for the dataset
+    :param pep_numbers: list containing numbers of the PEP-entries in the dataset
+    :param model: The type of search to use.
+    :param query: The terms to search for.
+    :param show: The amount of top results to return. Defaults to top 5
+
+    :returns: Top n results for the search-query, where n is defined by show.
+    """
     t2i = cv.vocabulary_
     _return_documents = []
     
