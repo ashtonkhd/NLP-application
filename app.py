@@ -5,7 +5,7 @@ from src import boolean_search as bosrch
 from src import rank_search as rascrh
 from src import search_logic as srchengine
 
-PEP_DATA = "project/static/pep_data.json"
+PEP_DATA = "./pep_data.json"
 
 app = Flask(__name__)
 
