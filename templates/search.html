@@ -11,8 +11,10 @@
 
   <body>
     <a href="/">Back</a>
+    <ul>
     {% for number in numbers %}
-    <p>{{number}} -- <a href={{metadata[number]["url"]}}>{{metadata[number]["title"]}}</a></p>
+      <li><p>{{number}} -- <a href={{metadata[number]["url"]}}>{{metadata[number]["title"]}}</a></p></li>
     {% endfor %}
+    </ul>
   </body>
 </html>
