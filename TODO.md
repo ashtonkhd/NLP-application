@@ -9,6 +9,8 @@ different types of searching engines.
 
 - [ ] Prettify the user interface
 
+- [ ] Add support for lower case logic operators (reason: CAPS is getting bother some)
+
 ## In Progress
 
 - [ ] Fix search logic
