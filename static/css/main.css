@@ -11,7 +11,7 @@ header {
   text-align: center;
   padding: 20px;
   background-color: #FF6600; /* orange */
-  color: white; /* white text */
+  color: #FFF; /* white text */
 }
 
 h1 {
@@ -87,4 +87,16 @@ ul li p {
 
 strong {
   color: #333;
+}
+}
+
+/* Footer syles */
+footer {
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #FF6600; /* orange */
+  color: white;
 }
