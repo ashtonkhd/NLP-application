@@ -11,6 +11,9 @@ different types of searching engines.
 
 - [ ] Add support for lower case logic operators (reason: CAPS is getting bother some)
 
+- [ ] Add safe guards for attempting to get more results than amount of peps
+  - [ ] Instead of straight results to iterator, use iterator while it is lesser or equal to length of results list.
+
 ## In Progress
 
 - [ ] Fix search logic
