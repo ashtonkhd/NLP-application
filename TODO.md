@@ -13,7 +13,7 @@ different types of searching engines.
 
 - [ ] Add safe guards for attempting to get more results than amount of peps
   - [ ] Instead of straight results to iterator, use iterator while it is lesser or equal to length of results list.
-
+ - [ ] Add a header, footer, background, and logo in the index.html.
 ## In Progress
 
 - [ ] Fix search logic
