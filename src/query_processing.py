@@ -13,7 +13,9 @@ LOGIC_OPERATORS = list(set(LOGIC_DICTIONARY.values()))
 def _rewrite_query(query):
     """Rewrites search-query
 
-    Replaces logic operators with variants from LOGIC_DICTIONARY. Makes other words lowercase.
+    Replaces logic operators with variants from LOGIC_DICTIONARY. Makes
+    other words lowercase. If multiple words are found with no logic
+    operators, inserts "&" between them.
 
     :param query: the search query to rewrite
 
@@ -26,6 +28,20 @@ def _rewrite_query(query):
             _tmp_split[_index] = LOGIC_DICTIONARY[_tmp_split[_index]]
         else:
             _tmp_split[_index] = _tmp_split[_index].lower()
+            
+    if not(any(operator in _tmp_split for operator in LOGIC_OPERATORS)) \
+    and (len(_tmp_split) > 1):
+        _tmp = list(enumerate(_tmp_split))
+        _needed = [1]
+        
+        for i in range(len(_tmp)):
+            if (_tmp[i][0] % 2 == 0) and not(_tmp[i][0] == 0):
+                _needed.append(_tmp[i][0])
+        
+        _extra_i = 0
+        for i in range(len(_needed)):
+            _tmp_split.insert(_needed[i] + _extra_i, "&")
+            _extra_i += 1
 
     return " ".join(_tmp_split)
 

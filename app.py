@@ -45,6 +45,9 @@ def search():
     numbers = []
     links = []
     
+    if query == "":
+        return render_template("empty_query.html")
+    
     match method:
         case "boolean":
             results = srchengine.run_search_engine(boolean_matrix,boolean_vectorizer,pep_numbers,"boolean",query, count)
