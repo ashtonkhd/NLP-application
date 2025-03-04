@@ -66,10 +66,12 @@ def run_search_engine(matrix, cv, pep_numbers, model, query, show=5):
 
             if got_hits:
                 ranked_list = _rank_hits(results, "ranked")
+                max_results = len(ranked_list)
 
                 for i in range(show):
-                    if not(ranked_list[i][1] == 0):
-                        _return_documents.append((f"{pep_numbers[ranked_list[i][0]]}", int(ranked_list[i][1])))
+                    if i <= max_results-1:
+                        if not(ranked_list[i][1] == 0):
+                            _return_documents.append((f"{pep_numbers[ranked_list[i][0]]}", int(ranked_list[i][1])))
 
         case "boolean":
             results, got_hits = quproc.process_query(query, matrix, t2i)
@@ -78,9 +80,11 @@ def run_search_engine(matrix, cv, pep_numbers, model, query, show=5):
                 # Some of the results are zero, so this makes
                 # all the 1s go before them.
                 result_list = _rank_hits(results, "boolean")
+                max_results = len(result_list)
 
                 for i in range(show):
-                    if not(result_list[i][1] == 0):
-                        _return_documents.append(pep_numbers[result_list[i][0]])
+                    if i <= max_results-1:
+                        if not(result_list[i][1] == 0):
+                            _return_documents.append(pep_numbers[result_list[i][0]])
 
     return _return_documents
