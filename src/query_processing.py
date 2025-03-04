@@ -34,8 +34,10 @@ def _get_new_hits(term_matrix, doc_hits, relation_to_previous, not_effect):
 
     :param term_matrix: The occurrence matrix of the current term.
     :param doc_hits: The occurrence matrices for all previous terms
-    :param relation_to_previous: The logic-relation to between term_matrix and doc_hits
-    :param not_effect: NOT operator. Reverses occurrences for term_matrix
+    :param relation_to_previous: The logic-relation to between
+    term_matrix and doc_hits
+    :param not_effect: NOT operator. Reverses occurrences for
+    term_matrix
 
     :returns: new doc_hits matrix.
     """
@@ -94,7 +96,8 @@ def _get_reverse_hits(term_matrix):
 def process_query(query, td_matrix, t2i):
     """Main function for processing queries
 
-    Processes a given query, according ot specifics about it such as logic operators and amount of terms.
+    Processes a given query, according ot specifics about it such as
+    logic operators and amount of terms.
 
     :param query: the query to process
     :param td_matrix: term matrix for the dataset
@@ -110,9 +113,9 @@ def process_query(query, td_matrix, t2i):
             terms_in_query = rewritten_query.split()
 
             doc_hits = None
-            relation_to_previous = None
-            not_effect = None # Whether to take reserve value (not-operator)
-            first_time = True # For some reason going by doc_hits = None, stopped working.
+            relation_to_previous = "AND"
+            not_effect = None
+            first_time = True
 
             for term in terms_in_query:
                 if not(term in LOGIC_OPERATORS):
