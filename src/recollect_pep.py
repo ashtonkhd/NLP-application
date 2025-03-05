@@ -8,7 +8,7 @@ import typing
 from bs4 import BeautifulSoup
 
 PEP_METADATA_FILE: str = "./pep_metadata.json"
-PEP_DATA_FILE: str = "./project/static/pep_data.json"
+PEP_DATA_FILE: str = "./pep_data.json"
 
 BAD_STATUS: list[str] = ["Withdrawn", "Superseded"]
 GOOD_STATUS: list[str] = ["Active", "Accepted", "Final"]
