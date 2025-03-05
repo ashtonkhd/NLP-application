@@ -20,7 +20,7 @@ the following external modules are available for use:
 - requests [OPTIONAL]
 - beautifulsoup4 [OPTIONAL]
 
-## Using
+## Usage
 
 ### Creating/Recreating the dataset
 
