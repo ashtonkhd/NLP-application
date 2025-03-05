@@ -1,29 +1,48 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9; /* 747474 */
-  margin: 0;
-  padding: 0;
-  color: #333;
+/* styles for header */
+
+header img.logo {
+  width: 100px;  
+  height: auto; 
+  margin-right: 20px; 
 }
 
-/* styles for header */
 header {
-  text-align: center;
+  display: flex;
+  align-items: center;  /* Vertical */
   padding: 20px;
   background-color: #FF652F; /* orange */
   color: white;
+  justify-content: flex-start;  /* Logo on the left*/
+  background-image: url('/static/images/3.png');
+  background-size: cover; 
+  background-position: center;  
+  background-repeat: no-repeat; 
 }
+
 
 h1 {
   text-align: center;
   color: white;
   margin-top: 30px;
+  flex-grow: 1;
 }
 
 .description {
   text-align: center;
   font-size: 18px;
-  color: #555;
+  color: #333;
+}
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #f4f4f9; /* 747474 */
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background-image: url('/static/images/6.png');
+  background-size: cover; 
+  background-position: center;  
+  background-repeat: no-repeat;  
 }
 
 form {
@@ -34,6 +53,7 @@ form {
 input[type="text"], select {
   padding: 10px;
   font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
   width: 250px;
   margin: 10px 0;
   border: 1px solid #ccc;
@@ -45,6 +65,7 @@ input[type="submit"] {
   background-color: #14A76C;
   color: white;
   font-size: 16px;
+  font-family: 'Courier New', Courier, monospace;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -94,4 +115,35 @@ footer {
   width: 100%;
   background-color: #FF652F; /* orange */
   color: white;
+  background-image: url('/static/images/3.png');
+  background-size: cover; 
+  background-position: center;  
+  background-repeat: no-repeat; 
+
+}
+
+/* Content box styles */
+.content {
+  padding: 20px;
+}
+
+.white-box {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow added */
+  max-width: 800px;
+  margin: 0 auto; /* Centering */
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+.white-box h2 {
+  color: #333;
+}
+
+.white-box p {
+  color: #555;
 }
