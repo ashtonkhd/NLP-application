@@ -2,42 +2,50 @@
 <html lang="eng">
   <head>
     <meta charset="UTF-8">
-    <meta name = "viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PEP Search Engine</title>
-
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
   </head>
 
   <body>
     <!-- Header -->
     <header>
-      <img src="{{ url_for('static', filename='images/2.png') }}" alt="Logo" class="logo">
-      <h1>PEP Search</h1>
-    <h1>PEP Search</h1>
+      <img src="{{ url_for('static', filename='images/LogoPS_non.png') }}" alt="Logo" class="logo">
+      <h1>PEP SEARCH</h1>
     </header>
-
-    <p class="description">
-      Search for Python Enhancement Proposals (PEPs) using different methods.
-    </p>
-	  
-    <form action="/search" method="POST">
-      <p>Query: <input type="text" name="query"/></p>
-
-      <p>Show: <input type="text" name="amount" placeholder="5"/></p>
-	    
-      <select name="method" id="method">
-        <option value="boolean">Boolean Search</option>
-        <option value="ranked">TF-IDF Search</option>
-      </select>
-      <p><input type="checkbox" name="use_graphs"/> Use graphs</p>
-      <p><input type="submit" value="Submit"/></p>
-    </form>
-
-     <!-- Footer -->
-     <footer>
-      <p>&copy; 2025 PEP Search Engine.</p>
-    </footer>
     
+    <div class="content">
+      <div class="white-box">
+        <h2>FAST AND CURIOUS</h2>
+        <p>Search for Python Enhancement Proposals (PEPs) using different methods.</p>
+        
+        <!-- Integrated Form -->
+        <form action="/search" method="POST">
+          <div class="form-container">
+            <label for="query">Query:</label>
+            <input type="text" id="query" name="query" />
+            
+            <label for="show">Show:</label>
+            <input type="number" id="show" name="amount" value="5" />
+            
+            <label for="method">Search Method:</label>
+            <select name="method" id="method">
+              <option value="boolean">Boolean Search</option>
+              <option value="ranked">TF-IDF Search</option>
+              <option value="semantic">Semantic Search</option>
+            </select>
+            
+            <p><input type="checkbox" name="use_graphs" /> Use graphs</p>
+            
+            <p><input type="submit" value="Submit" /></p>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 PEP SEARCH ENGINE</p>
+    </footer>
   </body>
 </html>
