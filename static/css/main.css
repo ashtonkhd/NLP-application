@@ -54,11 +54,6 @@ form {
 }
 
 /* --- Input Fields --- */
-
-label {
-  font-weight: normal;
-}
-
 input[type="text"], 
 input[type="number"], 
 select {
@@ -74,13 +69,13 @@ select {
 
 /* --- Submit Button --- */
 input[type="submit"] {
-  padding: 16px 30px;
+  padding: 15px 30px;
   background-color: #4169E1; /* 14A76C */
   color: white;
-  font-size: 14px;
+  font-size: 18px;
   font-family: 'Courier New', Courier, monospace;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease; 
 }
@@ -156,8 +151,8 @@ footer {
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow added */
-  max-width: 1000px;
-  width: 80%;
+  max-width: 800px;
+  width: 90%;
   text-align: center;
   margin: 0 auto; /* Centering */
   display: flex; 
@@ -196,9 +191,9 @@ nav ul li {
 nav ul li a {
   text-decoration: none;
   color: white; 
-  font-size: 14px;
-  padding: 8px 12px;
-  border-radius: 4px; 
+  font-size: 12px;
+  padding: 2px 5px;
+  border-radius: 8px; 
   transition: background-color 0.3s ease; 
   display: inline-block; 
   text-align: center;
@@ -269,4 +264,8 @@ nav ul li a:hover {
 
 p input[type="checkbox"] {
   margin-left: 5px;
+}
+
+label {
+  font-weight: normal;
 }
