@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}PEP Search{% endblock %}</title>
+    <title>{% block title %}PEP Search Engine{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <!-- Menu placed inside the body, not in the header -->
+    <!-- Header on the top) -->
+    <header>
+        <img src="{{ url_for('static', filename='images/LogoPS_non.png') }}" alt="Logo" class="logo">
+        <h1>PEP SEARCH ENGINE</h1>
+    </header>
+
+    <!-- Menu here -->
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/search">Search</a></li>
             <li><a href="/results">Results</a></li>
+            <!-- Other pages -->
         </ul>
     </nav>
 
+    <!-- Content -->
     <main>
         {% block content %}{% endblock %}
     </main>
