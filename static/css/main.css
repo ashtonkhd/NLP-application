@@ -191,7 +191,7 @@ nav ul {
   padding: 0;
   display: flex; /* Horizontal */
   justify-content: center; /* Center */
-  background-color: #FF652F; /* Background */
+  background-color: #000000; /* Background */
   border-radius: 5px; /* Закругленные углы */
 }
 
@@ -203,7 +203,7 @@ nav ul li a {
   text-decoration: none;
   color: white;
   font-size: 14px; 
-  padding: 10px 20px; 
+  padding: 5px 10px; 
   border-radius: 4px;
   transition: background-color 0.3s ease, transform 0.2s ease;
 
