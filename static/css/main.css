@@ -132,7 +132,11 @@ footer {
 
 /* Content box styles */
 .content {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
   padding: 20px;
+  flex-wrap: wrap;
 }
 
 .white-box {
@@ -140,8 +144,8 @@ footer {
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow added */
-  max-width: 600px;
-  width: 90%;
+  max-width: 1000px;
+  width: 80%;
   text-align: center;
   margin: 0 auto; /* Centering */
   display: flex; 
@@ -168,7 +172,9 @@ nav ul {
   margin: 0;
   padding: 0;
   display: flex; /* Horizontal */
-  justify-content: center; /* Left */
+  justify-content: center; /* Center */
+  border-radius: 5px;
+  background-color: none;
 }
 
 nav ul li {
@@ -178,13 +184,15 @@ nav ul li {
 nav ul li a {
   text-decoration: none;
   color: white; 
-  font-size: 16px;
+  font-size: 14px;
   padding: 8px 12px;
   border-radius: 4px; 
   transition: background-color 0.3s ease; 
+  display: inline-block; 
+  text-align: center;
 }
 
-/* Change */
+/* ---Change--- */
 nav ul li a:hover {
   background-color: #ff9900; /* orange */
 }
@@ -218,4 +226,34 @@ nav ul li a:hover {
   background-color: #f0f0f0;
   color: #4169E1; /* FF652F 4169E1 */
   transform: scale(1.05); 
+}
+
+/* --- Container --- */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Добавляет отступы между элементами */
+}
+
+.form-container div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-container label {
+  width: 150px; /* Регулирует ширину для выравнивания */
+  font-weight: bold;
+}
+
+.form-container input,
+.form-container select {
+  flex-grow: 1; /* Заполняет доступное пространство */
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+p input[type="checkbox"] {
+  margin-left: 5px;
 }
