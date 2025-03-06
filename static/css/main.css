@@ -158,12 +158,17 @@ footer {
   color: #555;
 }
 /* --- Horizontal Menu --- */
+
+nav {
+  margin-top: 20px;
+}
+
 nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   display: flex; /* Horizontal */
-  justify-content: flex-start; /* Left */
+  justify-content: center; /* Left */
 }
 
 nav ul li {
@@ -187,8 +192,8 @@ nav ul li a:hover {
 /* --- Menu styles for body --- */
 nav ul {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
+  margin: 10;
+  padding: 5;
   display: flex; /* Horizontal */
   justify-content: center; /* Center */
   background-color: #000000; /* Background */
@@ -202,8 +207,8 @@ nav ul li {
 nav ul li a {
   text-decoration: none;
   color: white;
-  font-size: 14px; 
-  padding: 5px 10px; 
+  font-size: 7 px; 
+  padding: 3px 7px; 
   border-radius: 4px;
   transition: background-color 0.3s ease, transform 0.2s ease;
 
