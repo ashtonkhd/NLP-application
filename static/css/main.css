@@ -157,3 +157,29 @@ footer {
 .white-box p {
   color: #555;
 }
+/* --- Horizontal Menu --- */
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Horizontal */
+  justify-content: flex-start; /* Left */
+}
+
+nav ul li {
+  margin: 0 15px; /* Spaces */
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white; 
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 4px; 
+  transition: background-color 0.3s ease; 
+}
+
+/* Change */
+nav ul li a:hover {
+  background-color: #ff9900; /* orange */
+}
