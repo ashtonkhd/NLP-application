@@ -70,7 +70,7 @@ select {
 /* --- Submit Button --- */
 input[type="submit"] {
   padding: 10px 20px;
-  background-color: #14A76C;
+  background-color: #4169E1; /* 14A76C */
   color: white;
   font-size: 16px;
   font-family: 'Courier New', Courier, monospace;
@@ -211,6 +211,6 @@ nav ul li a {
 
 nav ul li a:hover {
   background-color: #f0f0f0;
-  color: #FF652F;
+  color: #4169E1; /* FF652F 4169E1 */
   transform: scale(1.05); 
 }
