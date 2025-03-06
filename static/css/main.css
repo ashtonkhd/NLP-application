@@ -50,7 +50,7 @@ body {
 
 form {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 /* --- Input Fields --- */
@@ -69,7 +69,7 @@ select {
 
 /* --- Submit Button --- */
 input[type="submit"] {
-  padding: 15px 30px;
+  padding: 20px 40px;
   background-color: #4169E1; /* 14A76C */
   color: white;
   font-size: 18px;
@@ -109,7 +109,7 @@ ul li a {
 }
 
 ul li a:hover {
-  color: #14A76C;
+  color: #4169E1; /* 14A76C */
 }
 
 ul li p {
@@ -148,11 +148,11 @@ footer {
 
 .white-box {
   background-color: white;
-  padding: 40px;
+  padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow added */
-  max-width: 800px;
-  width: 90%;
+  max-width: 1000px;
+  width: 80%;
   text-align: center;
   margin: 0 auto; /* Centering */
   display: flex; 
@@ -171,7 +171,7 @@ footer {
 /* --- Horizontal Menu --- */
 
 nav {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 nav ul {
@@ -180,7 +180,7 @@ nav ul {
   padding: 0;
   display: flex; /* Horizontal */
   justify-content: center; /* Center */
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: none;
 }
 
@@ -191,8 +191,8 @@ nav ul li {
 nav ul li a {
   text-decoration: none;
   color: white; 
-  font-size: 12px;
-  padding: 2px 5px;
+  font-size: 14px;
+  padding: 6px 12px;
   border-radius: 8px; 
   transition: background-color 0.3s ease; 
   display: inline-block; 
@@ -208,12 +208,12 @@ nav ul li a:hover {
 
 nav ul {
   list-style-type: none;
-  margin: 10;
-  padding: 5;
+  margin: 6;
+  padding: 3;
   display: flex; /* Horizontal */
   justify-content: center; /* Center */
   background-color: #000000; /* Background */
-  border-radius: 5px; /* Закругленные углы */
+  border-radius: 8px; /* Закругленные углы */
 }
 
 nav ul li {
@@ -223,9 +223,9 @@ nav ul li {
 nav ul li a {
   text-decoration: none;
   color: white;
-  font-size: 7 px; 
-  padding: 3px 7px; 
-  border-radius: 4px;
+  font-size: 14 px; 
+  padding: 6px 12px; 
+  border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.2s ease;
 
 }
@@ -251,7 +251,7 @@ nav ul li a:hover {
 
 .form-container label {
   width: 150px; 
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .form-container input,
@@ -264,8 +264,4 @@ nav ul li a:hover {
 
 p input[type="checkbox"] {
   margin-left: 5px;
-}
-
-label {
-  font-weight: normal;
 }
