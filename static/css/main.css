@@ -183,3 +183,34 @@ nav ul li a {
 nav ul li a:hover {
   background-color: #ff9900; /* orange */
 }
+
+/* --- Menu styles for body --- */
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Horizontal */
+  justify-content: center; /* Center */
+  background-color: #FF652F; /* Background */
+  border-radius: 5px; /* Закругленные углы */
+}
+
+nav ul li {
+  margin: 0 15px; /* spaces */
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px; 
+  padding: 10px 20px; 
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+}
+
+nav ul li a:hover {
+  background-color: #f0f0f0;
+  color: #FF652F;
+  transform: scale(1.05); 
+}

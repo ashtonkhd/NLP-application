@@ -7,15 +7,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/search">Search</a></li>
-                <li><a href="/about">Results</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Menu placed inside the body, not in the header -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/search">Search</a></li>
+            <li><a href="/results">Results</a></li>
+        </ul>
+    </nav>
 
     <main>
         {% block content %}{% endblock %}
@@ -26,3 +25,4 @@
     </footer>
 </body>
 </html>
+
