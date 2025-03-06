@@ -1,24 +1,27 @@
 /* styles for header */
 
-header img.logo {
-  width: 100px;  
-  height: auto; 
-  margin-right: 20px; 
-}
-
 header {
   display: flex;
-  align-items: center;  /* Vertical */
+  align-items: center;  /* Vertical alignment */
+  justify-content: center;  /* Center text, logo separate */
   padding: 20px;
-  background-color: #FF652F; /* orange */
+  background-color: #FF652F; /* Orange */
   color: white;
-  justify-content: flex-start;  /* Logo on the left*/
   background-image: url('/static/images/3.png');
   background-size: cover; 
   background-position: center;  
   background-repeat: no-repeat; 
+  position: relative; /* Needed for absolute positioning of .logo */
 }
 
+header img.logo {
+  width: 100px;  
+  height: auto; 
+  position: absolute;
+  left: 20px; /* Keep logo on the left */
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+}
 
 h1 {
   text-align: center;
@@ -50,16 +53,21 @@ form {
   margin-top: 20px;
 }
 
-input[type="text"], select {
+/* --- Input Fields --- */
+input[type="text"], 
+input[type="number"], 
+select {
+  width: 100%; 
+  max-width: 400px; 
   padding: 10px;
   font-size: 16px;
   font-family: 'Courier New', Courier, monospace;
-  width: 250px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
+/* --- Submit Button --- */
 input[type="submit"] {
   padding: 10px 20px;
   background-color: #14A76C;
@@ -129,10 +137,12 @@ footer {
 
 .white-box {
   background-color: white;
-  padding: 30px;
+  padding: 40px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow added */
-  max-width: 800px;
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
   margin: 0 auto; /* Centering */
   display: flex; 
   flex-direction: column; 
