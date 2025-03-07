@@ -50,7 +50,7 @@ body {
 
 form {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 /* --- Input Fields --- */
@@ -69,14 +69,21 @@ select {
 
 /* --- Submit Button --- */
 input[type="submit"] {
-  padding: 10px 20px;
+  padding: 20px 40px;
   background-color: #4169E1; /* 14A76C */
   color: white;
-  font-size: 16px;
+  font-size: 20px;
   font-family: 'Courier New', Courier, monospace;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+input[type="submit"]:hover {
+  background-color:  #f0f0f0;
+  color: #4169E1;
+  transform: scale(1.1); 
 }
 
 /* Search results styles */
@@ -102,7 +109,7 @@ ul li a {
 }
 
 ul li a:hover {
-  color: #14A76C;
+  color: #4169E1; /* 14A76C */
 }
 
 ul li p {
@@ -132,16 +139,20 @@ footer {
 
 /* Content box styles */
 .content {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
   padding: 20px;
+  flex-wrap: wrap;
 }
 
 .white-box {
   background-color: white;
-  padding: 40px;
+  padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow added */
-  max-width: 600px;
-  width: 90%;
+  max-width: 1000px;
+  width: 80%;
   text-align: center;
   margin: 0 auto; /* Centering */
   display: flex; 
@@ -160,7 +171,7 @@ footer {
 /* --- Horizontal Menu --- */
 
 nav {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 nav ul {
@@ -168,7 +179,9 @@ nav ul {
   margin: 0;
   padding: 0;
   display: flex; /* Horizontal */
-  justify-content: center; /* Left */
+  justify-content: center; /* Center */
+  border-radius: 8px;
+  background-color: none;
 }
 
 nav ul li {
@@ -178,26 +191,29 @@ nav ul li {
 nav ul li a {
   text-decoration: none;
   color: white; 
-  font-size: 16px;
-  padding: 8px 12px;
-  border-radius: 4px; 
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 8px; 
   transition: background-color 0.3s ease; 
+  display: inline-block; 
+  text-align: center;
 }
 
-/* Change */
+/* ---Change--- */
 nav ul li a:hover {
   background-color: #ff9900; /* orange */
 }
 
 /* --- Menu styles for body --- */
+
 nav ul {
   list-style-type: none;
-  margin: 10;
-  padding: 5;
+  margin: 6;
+  padding: 3;
   display: flex; /* Horizontal */
   justify-content: center; /* Center */
   background-color: #000000; /* Background */
-  border-radius: 5px; /* Закругленные углы */
+  border-radius: 8px; /* Закругленные углы */
 }
 
 nav ul li {
@@ -207,9 +223,9 @@ nav ul li {
 nav ul li a {
   text-decoration: none;
   color: white;
-  font-size: 7 px; 
-  padding: 3px 7px; 
-  border-radius: 4px;
+  font-size: 14 px; 
+  padding: 6px 12px; 
+  border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.2s ease;
 
 }
@@ -218,4 +234,34 @@ nav ul li a:hover {
   background-color: #f0f0f0;
   color: #4169E1; /* FF652F 4169E1 */
   transform: scale(1.05); 
+}
+
+/* --- Container --- */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
+}
+
+.form-container div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-container label {
+  width: 150px; 
+  font-weight: normal;
+}
+
+.form-container input,
+.form-container select {
+  flex-grow: 1; 
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+p input[type="checkbox"] {
+  margin-left: 5px;
 }
