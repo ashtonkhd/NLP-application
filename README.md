@@ -50,3 +50,8 @@ python AND/and NOT/not firefox
 Note: In the examples given, `AND/and` indicate that both upper and
 lowercased variants work, not that the term `AND/and` itself is the
 expected operator.
+
+## See Also
+
+Documentation for the functions of the program can be found in
+docs/functions.md
