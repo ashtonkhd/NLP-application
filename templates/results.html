@@ -8,15 +8,20 @@
   <head>
     <title>PEP SE: Results</title>
 
-    <meta chartset="UTF-8">
-    <meta name="viewport" content="width=device-width, initil-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   </head>
 
   <body>
+    <h2>Search Results ({{ count }})</h2>
     <div class="results-list">
-      
+      {% for number in numbers %}
+        <div>
+          {{ number }} - <a href="{{ metadata[number]['url'] }}">{{ metadata[number]['title'] }}</a>
+        </div>
+      {% endfor %}
     </div>
   </body>
 </html>

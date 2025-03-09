@@ -16,9 +16,9 @@
     <!-- Menu here -->
     <nav>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/search">Search</a></li>
-            <li><a href="/results">Results</a></li>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('search') }}">Search</a></li>
+            <li><a href="{{ url_for('results') }}">Results</a></li>
             <!-- Other pages -->
         </ul>
     </nav>

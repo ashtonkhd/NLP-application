@@ -78,7 +78,13 @@ def search():
     if graphs:
         return render_template("search_graphs.html", count=count, numbers=numbers, metadata=documents)
     else:
-        return render_template("search.html", count=count, numbers=numbers, metadata=documents)
+       return render_template("search.html", count=count, numbers=numbers, metadata=documents)
+#Results route    
+@app.route("/results", methods=["POST"])
+def results():
+    numbers = request.form.getlist("numbers")
+    count = request.form.get("count", type=int, default=0)
+    return render_template("results.html", numbers=numbers, count=count, metadata=documents)
 
 if __name__ == "__main__":
     app.run(debug=True)
